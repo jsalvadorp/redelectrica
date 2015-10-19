@@ -12,17 +12,44 @@ costo_unitario = @(capacidad)  2 + capacidad.^0.6;
 % START
 
 arbol = randinit(prod, C, costo_unitario);
-grafica(arbol)
-% display(arbol)
-pause();
-s = vecino(arbol)
-grafica(s);
 
-% % START
-% N = length(padre);
-% prod_acum = suma(padre, prod)
-% costo_acum = costo(padre, prod_acum, C, costo_unitario)
-% % [npadre, nprod_acum, ncosto_acum] = vecino(padre, prod_acum, costo_acum, costo_unitario, C)
-% [npadre, nprod_acum, ncosto_acum] = vecino(padre, prod_acum, costo_acum, costo_unitario, C)
+% RECOCIDO
 
-% grafica(npadre, prod, C, nprod_acum)
+p.cadIntAcep = 40;
+p.cadInt = 80;
+p.maxCad = 1;
+p.frecImp = 5;
+p.alfa = 0.80;
+p.beta = 1.2;
+p.minRazAcep = 0.90;
+p.variarC = 0;
+p.x0 = arbol;
+p.FcnObj = @objetivo;
+p.FcnVec = @vecino;
+p.Imp = @grafica;     % función de impresión
+p.min = 1;
+
+c0 = 1;               % temperatura inicial
+
+r = recocido(p, c0);
+
+display(r)
+
+
+
+%    cadIntAcep: longitud de cadena en intentos aceptados
+%         cadInt: longitud máxima de cadena en intentos
+%         maxCad: número máximo de cadena de Markov sin mejora
+%        frecImp: frecuencia de impresión de mejor encontrado
+%             x0: estado inicial
+%         FcnObj: función objetivo
+%         FcnVec: función de vecindad
+%            Imp: función de impresión de estado
+%        variarC: bandera que indica si se varía la temperatura dentro de
+%                 las cadenas de Markov (default = 0)
+%           alfa: constante para disminuir la temperatura
+%           beta: razón de aumento de temperatura en cálculo de temperatura
+%                 inicial
+%     minRazAcep: mínima razón de aceptación para cálculo de temperatura
+%                 inicial
+%            min: bandera que indica si se está minimizando (default = 1)

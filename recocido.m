@@ -85,7 +85,9 @@ end
 
 Recocido(u);
 fprintf('Mejor punto encontrado:\n')
-params.Imp(mejor)
+% fprintf(' mejor=%f \n',mejor.f)
+
+params.Imp(mejor.x)
 fprintf('\n')
 
 r = res;
@@ -115,7 +117,11 @@ if mod(intentos,params.frecImp)==0
    res.uf = [res.uf; u.f];
    res.intentos = [res.intentos; intentos]; 
    res.c = [res.c; c];
-   params.Imp(mejor,u,intentos,c);
+   % params.Imp(mejor,u,intentos,c);
+   fprintf(' intentos=%d \n',intentos)
+   fprintf(' mejor=%f \n',mejor.f)
+
+   % params.Imp(mejor.x);
 end
 
 function b = AceptaIntento(u, v)

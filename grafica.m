@@ -1,6 +1,7 @@
 function grafica(s)
 
   N = length(s.padres);
+  objetivo(s);
 
   delta = 0.1;
   plot(s.coords(1,1),s.coords(1,2),'sr',s.coords(2:end,1),s.coords(2:end,2),'ob')
@@ -27,5 +28,7 @@ function grafica(s)
   title('Red el�ctrica (nodo:producci�n/env�a)')
   xlabel('x')
   ylabel('y')
+
+  pause()
 
 endfunction
