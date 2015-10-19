@@ -14,6 +14,8 @@ function vecino = vecino(solucion)
 	vecino.prod = solucion.prod;
 	vecino.coords = solucion.coords;
 	vecino.costo_unitario = solucion.costo_unitario;
+	vecino.prod_acum = solucion.prod_acum;
+	vecino.costo_acum = solucion.costo_acum;
 
 
 	vecino.padres(subarbol) = destino;
