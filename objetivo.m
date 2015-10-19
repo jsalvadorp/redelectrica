@@ -1,3 +1,3 @@
-function objetivo(padres, prod_acum, costo_acum)
-	objetivo = costo_acum(1);
+function objetivo(solucion) %(padres, prod_acum, costo_acum)
+	objetivo = solucion.costo_acum(1);
 endfunction

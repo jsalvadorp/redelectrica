@@ -1,5 +1,7 @@
-function [npadres, nprod_acum, ncosto_acum] = vecino (padres, prod_acum, costo_acum, costo_unitario, coords)
-	N = length(padres);
+% function [vecino.padres, vecino.padre, vecino.costo_acum] = vecino (padres, prod_acum, costo_acum, costo_unitario, solucion.coords)
+function vecino = vecino(solucion)
+%(padres, prod_acum, costo_acum, costo_unitario, solucion.coords)
+	N = length(solucion.padres);
 	subarbol = 0;
 	destino = 0;
 
@@ -7,40 +9,41 @@ function [npadres, nprod_acum, ncosto_acum] = vecino (padres, prod_acum, costo_a
 		subarbol = 1 + randi(N - 1); % rand entre 2 y N
 		destino = randi(N); % rand entre 1 y N
 
-	until (not(esancestro(subarbol, destino, padres)))
+	until (not(esancestro(subarbol, destino, solucion.padres)))
 
 	% copias
-	npadres = padres;
-	nprod_acum = prod_acum;
-	ncosto_acum = costo_acum;
+	vecino.padres = solucion.padres;
+	vecino.padre = prod_acum;
+	vecino.costo_acum = costo_acum;
 
 	% remover el subarbol del origen
-	padre = padres(subarbol);
+	padre = solucion.padres(subarbol);
 	actual = subarbol;
 
 	while (padre > 0)
-		nprod_acum(padre) -= nprod_acum(actual);
-		ncosto_acum(padre) -= ncosto_acum(actual) + costo_unitario(nprod_acum(actual)) * distancia(coords(padre), coords(actual));
+		vecino.padre(padre) -= vecino.padre(actual);
+		vecino.costo_acum(padre) -= vecino.costo_acum(actual) + costo_unitario(vecino.padre(actual)) * distancia(solucion.coords(padre), solucion.coords(actual));
 
-		actual = padres(actual);
-		padre = padres(actual);
+		actual = solucion.padres(actual);
+		padre = solucion.padres(actual);
 	endwhile
 
 
 
 	% insertar el subarbol al destino
-	padre = padres(destino);
+	padre = solucion.padres(destino);
 	actual = destino;
 
 	while (padre > 0)
-		nprod_acum(padre) += nprod_acum(actual);
-		ncosto_acum(padre) += ncosto_acum(actual) + costo_unitario(nprod_acum(actual)) * distancia(coords(padre), coords(actual));
+		vecino.padre(padre) += vecino.padre(actual);
+		vecino.costo_acum(padre) += vecino.costo_acum(actual) + costo_unitario(vecino.padre(actual)) * distancia(solucion.coords(padre), solucion.coords(actual));
 
-		actual = padres(actual);
-		padre = padres(actual);
+		actual = solucion.padres(actual);
+		padre = solucion.padres(actual);
 	endwhile
 
-	npadres(subarbol) = destino;
+	vecino.padres(subarbol) = destino;
+	vecino.coords = solucion.coords;
 endfunction
 
 function dist = distancia(x, y)
