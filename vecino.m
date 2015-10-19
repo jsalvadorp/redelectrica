@@ -1,43 +1,62 @@
-function [npadres, nprod_acum, ncosto_acum] = vecino (padres, prod_acum, costo_acum, costo_unitario)
+function [npadres, nprod_acum, ncosto_acum] = vecino (padres, prod_acum, costo_acum, costo_unitario, coords)
 	N = length(padres);
 	subarbol = 0;
 	destino = 0;
 
 	do
-		subarbol = rand(2, N);
-		destino = rand(1, N);
+		subarbol = 1 + randi(N - 1); % rand entre 2 y N
+		destino = randi(N); % rand entre 1 y N
 
-	until (not(ancestro(destino, subarbol)))
+	until (not(ancestro(subarbol, destino, padres)))
 
 	npadres = padres(:);
 	nprod_acum = prod_acum(:);
 	ncosto_acum = costo_acum(:);
 
 	% remover el subarbol del origen
-	i = padre(subarbol);
-	prod_sub = nprod_acum(subarbol);
+	padre = padres(subarbol);
+	actual = subarbol;
 
-	while (i > 0) % el padre de la raiz es 0 (sin padre)
-		nprod_acum(i) = nprod_acum(i) - prod_sub;
-		ncosto_acum(i) = costo_unitario(nprod_acum(i));
+	while (padre > 0)
+		nprod_acum(padre) -= nprod_acum(actual);
+		ncosto_acum(padre) -=
+			ncosto_acum(actual)
+			+ costo_unitario(nprod_acum(actual)) * distancia(coords(padre), coords(actual));
 
-		prod_sub = nprod_acum(i);
-		i = padre(i);
+		actual = padres(actual);
+		padre = padres(actual);
 	endwhile
 
 
 
 	% insertar el subarbol al destino
-	i = destino;
-	prod_sub = nprod_acum(subarbol);
+	padre = padres(destino);
+	actual = destino;
 
-	while (i > 0) % el padre de la raiz es 0 (sin padre)
-		nprod_acum(i) = nprod_acum(i) + prod_sub;
-		ncosto_acum(i) = costo_unitario(nprod_acum(i));
+	while (padre > 0)
+		nprod_acum(padre) += nprod_acum(actual);
+		ncosto_acum(padre) +=
+			ncosto_acum(actual)
+			+ costo_unitario(nprod_acum(actual)) * distancia(coords(padre), coords(actual));
 
-		prod_sub = nprod_acum(i);
-		i = padre(i);
+		actual = padres(actual);
+		padre = padres(actual);
 	endwhile
 
 	padre(subarbol) = destino
+endfunction
+
+function esancestro = ancestro(presuntopadre, presuntohijo, padres)
+	i = presuntohijo
+
+	while (i > 0)
+		if (i == padre)
+			esancestro = true;
+			return;
+		endif
+	endwhile
+
+	esancestro = false;
+	return;
+
 endfunction
