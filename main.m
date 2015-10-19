@@ -11,18 +11,46 @@ costo_unitario = @(capacidad)  2 + capacidad.^0.6;
 
 % START
 
-arbol = randinit(prod, C, costo_unitario)
-%grafica(arbol)
-% display(arbol)
-pause();
-s = vecino(arbol)
-%grafica(s);
 
-% % START
-% N = length(padre);
-% prod_acum = suma(padre, prod)
-% costo_acum = costo(padre, prod_acum, C, costo_unitario)
-% % [npadre, nprod_acum, ncosto_acum] = vecino(padre, prod_acum, costo_acum, costo_unitario, C)
-% [npadre, nprod_acum, ncosto_acum] = vecino(padre, prod_acum, costo_acum, costo_unitario, C)
+arbol = randinit(prod, C, costo_unitario);
 
-% grafica(npadre, prod, C, nprod_acum)
+% RECOCIDO
+
+p.cadIntAcep = 40;
+p.cadInt = 80;
+p.maxCad = 1;
+p.frecImp = 5;
+p.alfa = 0.80;
+p.beta = 1.2;
+p.minRazAcep = 0.90;
+p.variarC = 0;
+p.x0 = arbol;
+p.FcnObj = @objetivo;
+p.FcnVec = @vecino;
+p.Imp = @grafica;     % funci�n de impresi�n
+p.min = 1;
+
+c0 = 1;               % temperatura inicial
+
+r = recocido(p, c0);
+
+display(r)
+
+
+
+%    cadIntAcep: longitud de cadena en intentos aceptados
+%         cadInt: longitud m�xima de cadena en intentos
+%         maxCad: n�mero m�ximo de cadena de Markov sin mejora
+%        frecImp: frecuencia de impresi�n de mejor encontrado
+%             x0: estado inicial
+%         FcnObj: funci�n objetivo
+%         FcnVec: funci�n de vecindad
+%            Imp: funci�n de impresi�n de estado
+%        variarC: bandera que indica si se var�a la temperatura dentro de
+%                 las cadenas de Markov (default = 0)
+%           alfa: constante para disminuir la temperatura
+%           beta: raz�n de aumento de temperatura en c�lculo de temperatura
+%                 inicial
+%     minRazAcep: m�nima raz�n de aceptaci�n para c�lculo de temperatura
+%                 inicial
+%            min: bandera que indica si se est� minimizando (default = 1)
