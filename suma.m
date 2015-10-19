@@ -24,6 +24,5 @@ function prod_acum = suma(padre, prod)
      Aux(1,hojas) = 1;
      %display(A);
   end
-  display(prod_acum)
 
 endfunction

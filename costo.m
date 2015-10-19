@@ -39,8 +39,8 @@ function costo_acum = costo(padre, prod_acum, C, costo_unitario)
      end
      costo_acum(hojas) = costo_acum(hojas) + costo_arista(hojas);
 
-     display(hojas)
-     display(costo_acum(hojas))
+     % display(hojas)
+     % display(costo_acum(hojas))
 
      for i=1:length(hojas)
         costo_acum(padre(hojas(i))) = costo_acum(padre(hojas(i))) + costo_acum(hojas(i));
@@ -52,8 +52,6 @@ function costo_acum = costo(padre, prod_acum, C, costo_unitario)
      Aux(1,hojas) = 1;
      % display(A);
   end
-  display(costo_acum)
-
 
 
 endfunction
