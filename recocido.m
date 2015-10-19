@@ -84,9 +84,7 @@ if c==0
 end
 
 Recocido(u);
-fprintf('Mejor punto encontrado:\n')
-% fprintf(' mejor=%f \n',mejor.f)
-
+fprintf('Mejor punto encontrado: %f \n',mejor.f)
 params.Imp(mejor.x)
 fprintf('\n')
 
@@ -118,8 +116,7 @@ if mod(intentos,params.frecImp)==0
    res.intentos = [res.intentos; intentos]; 
    res.c = [res.c; c];
    % params.Imp(mejor,u,intentos,c);
-   fprintf(' intentos=%d \n',intentos)
-   fprintf(' mejor=%f \n',mejor.f)
+   fprintf(' intentos=%d; mejor=%f \n',intentos, mejor.f)
 
    % params.Imp(mejor.x);
 end

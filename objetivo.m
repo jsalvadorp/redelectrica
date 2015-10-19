@@ -6,4 +6,5 @@ function obj = objetivo(solucion) %(padres, prod_acum, costo_acum)
   % display(solucion.costo_acum)
   % LENTO FIN
 	obj = solucion.costo_acum(1);
+  % fprintf('Obj: %f \n', obj);
 endfunction

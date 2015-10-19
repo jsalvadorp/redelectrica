@@ -1,25 +1,39 @@
 
-% Datos CASO 1
+% % Datos CASO 1
 
 padre = [0 5 4 6 1 5 6];
 prod = [0 10 5 3 4 9 8];
 
 % Coordenadas
-% C = [0 0; 3 2; 6 2; 6 0; 3 -2; 6 -2; 9 -2];   % ORIGNAL
-C = [0 0; 3 2; 6 2; 5 0; 3 -2; 6 -2; 9 -2];
+C = [0 0; 3 2; 6 2; 6 0; 3 -2; 6 -2; 9 -2];   % ORIGNAL
+% C = [0 0; 3 2; 6 2; 5 0; 3 -2; 6 -2; 9 -2];
 costo_unitario = @(capacidad)  2 + capacidad.^0.6;
+
+
+% % Datos caso 2
+
+% % Padre del nodo i
+% padre = [0 3 7 3 4 7 9 6 1 7 10];
+
+% % Producción del nodo i
+% prod = [0 3 3 3 10 4 5 5 14 12 2];
+
+% % Coordenadas
+% C = [0 1.5; 1 0; 2 0
+% costo_unitario = @(capacidad)  2 + capacidad.^0.6;
+
 
 % START
 
 
 arbol = randinit(prod, C, costo_unitario);
-
+display(objetivo(arbol))
 % RECOCIDO
 
-p.cadIntAcep = 40;
-p.cadInt = 80;
+p.cadIntAcep = 80;
+p.cadInt = 500;
 p.maxCad = 1;
-p.frecImp = 5;
+p.frecImp = 100;
 p.alfa = 0.80;
 p.beta = 1.2;
 p.minRazAcep = 0.90;
@@ -34,7 +48,7 @@ c0 = 1;               % temperatura inicial
 
 r = recocido(p, c0);
 
-display(r)
+% display(r)
 
 
 
