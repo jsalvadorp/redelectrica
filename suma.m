@@ -26,6 +26,4 @@ function prod_acum = suma(padre, prod)
   end
   display(prod_acum)
 
-
-
 endfunction
