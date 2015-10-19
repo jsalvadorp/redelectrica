@@ -9,7 +9,17 @@ function grafica(s)
   hold on
   for h=2:N
   	 p = s.padres(h);
-  	 text(s.coords(h,1)+delta,s.coords(h,2)+delta,sprintf('%d:%d/%d',h-1,prod(h),s.prod_acum(h)))
+  	 
+     text(
+       s.coords(h,1)+
+       delta,s.coords(h,2)+
+       delta,
+       sprintf('%d:%d/%d',
+               h-1,
+               s.prod(h),
+               s.prod_acum(h))
+      )
+
   	 plot([s.coords(h,1) s.coords(p,1)],[s.coords(h,2) s.coords(p,2)],'-b')
   end
   text(s.coords(1,1)+delta,s.coords(1,2)+delta,'0')

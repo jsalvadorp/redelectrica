@@ -5,10 +5,18 @@ padre = [0 5 4 6 1 5 6];
 prod = [0 10 5 3 4 9 8];
 
 % Coordenadas
-C = [0 0;3 2;6 2;6 0;3 -2;6 -2;9 -2];
+% C = [0 0; 3 2; 6 2; 6 0; 3 -2; 6 -2; 9 -2];   % ORIGNAL
+C = [0 0; 3 2; 6 2; 5 0; 3 -2; 6 -2; 9 -2];
 costo_unitario = @(capacidad)  2 + capacidad.^0.6;
 
-arbol = randinit(prod, C, costo_unitario)
+% START
+
+arbol = randinit(prod, C, costo_unitario);
+grafica(arbol)
+% display(arbol)
+pause();
+s = vecino(arbol)
+grafica(s);
 
 % % START
 % N = length(padre);

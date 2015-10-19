@@ -11,9 +11,11 @@ function vecino = vecino(solucion)
 
 	% copias
 	vecino.padres = solucion.padres;
+	vecino.prod = solucion.prod;
+
 	vecino.prod_acum = solucion.prod_acum;
 	vecino.costo_acum = solucion.costo_acum;
-	vecino.coords = solucion.costo_acum;
+	vecino.coords = solucion.coords;
 
 	% remover el subarbol del origen
 	padre = solucion.padres(subarbol);
@@ -21,7 +23,7 @@ function vecino = vecino(solucion)
 
 	while (padre > 0)
 		vecino.prod_acum(padre) -= vecino.prod_acum(actual);
-		vecino.costo_acum(padre) -= vecino.costo_acum(actual) + costo_unitario(vecino.prod_acum(actual)) * distancia(solucion.coords(padre), solucion.coords(actual));
+		vecino.costo_acum(padre) -= vecino.costo_acum(actual) + solucion.costo_unitario(vecino.prod_acum(actual)) * distancia(solucion.coords(padre), solucion.coords(actual));
 
 		actual = solucion.padres(actual);
 		padre = solucion.padres(actual);
@@ -34,8 +36,8 @@ function vecino = vecino(solucion)
 	actual = destino;
 
 	while (padre > 0)
-		vecino.padre(padre) += vecino.prod_acum(actual);
-		vecino.costo_acum(padre) += vecino.costo_acum(actual) + costo_unitario(vecino.prod_acum(actual)) * distancia(solucion.coords(padre), solucion.coords(actual));
+		vecino.prod_acum(padre) += vecino.prod_acum(actual);
+		vecino.costo_acum(padre) += vecino.costo_acum(actual) + solucion.costo_unitario(vecino.prod_acum(actual)) * distancia(solucion.coords(padre), solucion.coords(actual));
 
 		actual = solucion.padres(actual);
 		padre = solucion.padres(actual);
