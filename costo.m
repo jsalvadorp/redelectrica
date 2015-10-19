@@ -18,9 +18,8 @@ function costo_acum = costo(padre, prod_acum, C, costo_unitario)
   costo_arista = costo_unitario(prod_acum).*[0;diag(D(2:N,padre(2:N)))]';
 
   % Costo por arista
-  display(costo_arista)
+  % display(costo_arista)
   fprintf('El costo total es: %f\n',sum(costo_arista))
-
 
   % Costo acumulado(no inclusivo)
 
