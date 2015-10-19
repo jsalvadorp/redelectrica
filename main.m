@@ -11,12 +11,12 @@ costo_unitario = @(capacidad)  2 + capacidad.^0.6;
 
 % START
 
-arbol = randinit(prod, C, costo_unitario);
-grafica(arbol)
+arbol = randinit(prod, C, costo_unitario)
+%grafica(arbol)
 % display(arbol)
 pause();
 s = vecino(arbol)
-grafica(s);
+%grafica(s);
 
 % % START
 % N = length(padre);
