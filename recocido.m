@@ -1,4 +1,4 @@
-function r = recocido(p,varargin)
+ function r = recocido(p,varargin)
 
 % r = recocido(p)
 % r = recocido(p,c0)

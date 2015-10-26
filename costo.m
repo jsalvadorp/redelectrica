@@ -15,7 +15,7 @@ function costo_acum = costo(padre, prod_acum, C, costo_unitario)
   % Matriz de distancias
   % display(D)
 
-  costo_arista = costo_unitario(prod_acum).*[0;diag(D(2:N,padre(2:N)))]';
+  costo_arista = arrayfun(costo_unitario, prod_acum).*[0;diag(D(2:N,padre(2:N)))]';
 
   % Costo por arista
   % fprintf('El costo total es: %f\n',sum(costo_arista))
