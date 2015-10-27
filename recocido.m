@@ -22,6 +22,7 @@
 %     minRazAcep: mínima razón de aceptación para cálculo de temperatura
 %                 inicial
 %            min: bandera que indica si se está minimizando (default = 1)
+%          Quiet: ==1 deshabilita impresion y pausas
 %
 % See also: blocal, plotblocal, plotRecocido
 
@@ -85,7 +86,9 @@ end
 
 Recocido(u);
 fprintf('Mejor punto encontrado: %f \n',mejor.f)
-params.Imp(mejor.x)
+if(params.Quiet == 0)
+   params.Imp(mejor.x)
+endif
 fprintf('\n')
 
 r = res;

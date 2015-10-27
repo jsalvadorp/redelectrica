@@ -32,7 +32,7 @@ p.cadIntAcep = 80;
 p.cadInt = 500;
 p.maxCad = 1;
 p.frecImp = 100;
-p.alfa = 0.80;
+p.alfa = 0.95;
 p.beta = 1.2;
 p.minRazAcep = 0.90;
 p.variarC = 0;
@@ -41,11 +41,12 @@ p.FcnObj = @objetivo;
 p.FcnVec = @vecino;
 p.Imp = @grafica;     % funci�n de impresi�n
 p.min = 1;
+p.Quiet = 1;
 
-c0 = 1;               % temperatura inicial
+c0 = 2;               % temperatura inicial
 
 % r = recocido(p, c0);
 
 
-
+p.frecImp = 10;
 [x,prom,desv] = plotRecocido(p,20,c0);
